@@ -1,4 +1,4 @@
-package src;
+
 
 import static org.junit.Assert.*;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class TestFlightMap {
 	private FlightMap fm;
 
 	@Test
-	public void constructerTest() {
+	public void constructorTest() {
 		ArrayList<String> alTest = new ArrayList<String>(); 
 		ArrayList<Pair> pairTest = new ArrayList<Pair>();
 		Map<String, ArrayList<Pair>> mapTest = new HashMap<String, ArrayList<Pair>>();
@@ -33,9 +33,9 @@ public class TestFlightMap {
 		mapTest.put("A", pairTest);
 
 		fm = new FlightMap(mapTest, origin, alTest);
-		assertEquals(origin, fm.origin);
-		assertEquals(mapTest, fm.map);
-		assertEquals(alTest, fm.cities);
+		assertEquals("testing origin", origin, fm.origin);
+		assertEquals("testing map",mapTest, fm.map);
+		assertEquals("testing cities",alTest, fm.cities);
 	}
 
 }
