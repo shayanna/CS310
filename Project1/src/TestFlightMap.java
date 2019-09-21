@@ -9,16 +9,19 @@ import org.junit.Test;
 
 public class TestFlightMap {
 
-	private FlightMap fm;
+	public FlightMap fm;
+	public ArrayList<String> alTest;
+	public String origin = "";
+	public Map<String, ArrayList<Pair>> mapTest;
 
 	@Test
 	public void constructorTest() {
-		ArrayList<String> alTest = new ArrayList<String>(); 
+		alTest = new ArrayList<String>(); 
 		ArrayList<Pair> pairTest = new ArrayList<Pair>();
-		Map<String, ArrayList<Pair>> mapTest = new HashMap<String, ArrayList<Pair>>();
+		mapTest = new HashMap<String, ArrayList<Pair>>();
 
 		//Initialize origin
-		String origin = "A";
+		origin = "A";
 
 		// Initialize alTest
 		alTest.add("A"); 
@@ -33,9 +36,52 @@ public class TestFlightMap {
 		mapTest.put("A", pairTest);
 
 		fm = new FlightMap(mapTest, origin, alTest);
-		assertEquals("testing origin", origin, fm.origin);
-		assertEquals("testing map",mapTest, fm.map);
-		assertEquals("testing cities",alTest, fm.cities);
+		assertEquals("testing origin", origin, FlightMap.origin);
+		assertEquals("testing map",mapTest, FlightMap.map);
+		assertEquals("testing cities",alTest, FlightMap.cities);
+	}
+	
+//	@Test
+//	public void testFindPaths() {
+//		
+//		fm
+//		ArrayList<String> cityTest = new ArrayList<String>(); 
+//		ArrayList<Pair> pairTest = new ArrayList<Pair>();
+//		Map<String, ArrayList<Pair>> mapTest = new HashMap<String, ArrayList<Pair>>();
+//
+//		//Initialize origin
+//		String origin = "A";
+//
+//		// Initialize alTest
+//		alTest.add("A"); 
+//		alTest.add("B"); 
+//		alTest.add("C"); 
+//
+//		// Initialize pairTest
+//		pairTest.add(new Pair("B", 200)); 
+//		pairTest.add(new Pair("C", 150)); 
+//
+//		//Initialize Map
+//		mapTest.put("A", pairTest);
+//
+//		fm = new FlightMap(mapTest, origin, alTest);
+//		assertEquals("testing origin", origin, fm.origin);
+//		assertEquals("testing map",mapTest, fm.map);
+//		assertEquals("testing cities",alTest, fm.cities);
+//	}
+	
+	@Test
+	public void testGetCosts()
+	{
+		fm = new FlightMap(mapTest, origin, alTest);
+		Map<String, Integer> testerCosts = new HashMap<String, Integer>();
+		testerCosts.put("B", 200);
+		fm.setCosts(testerCosts);
+		
+		System.out.println("tester: " + testerCosts);
+		assertSame(testerCosts, fm.getCosts());
+		
+		
 	}
 
 }

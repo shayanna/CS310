@@ -18,7 +18,7 @@ public class FlightMap {
 		this.origin = origin;
 		this.cities = cities;
 		
-		FindPaths();
+		//FindPaths();
 	}
 	
 	public static void FindPaths()
@@ -26,12 +26,22 @@ public class FlightMap {
 		//NOW everything should be initialized and you want to find all the possible paths
 		for(int i =0; i < cities.size(); i++)
 		{
-			BFS(origin, cities.get(i));
+			//BFS(origin, cities.get(i));
 			allPaths.put(cities.get(i), path);
 		}
 		//printMap(allPaths);
-		calcCosts(allPaths);
+		//calcCosts(allPaths);
 
+	}
+	
+	public Map<String, Integer> getCosts()
+	{
+		return costs;
+	}
+	
+	public void setCosts(Map<String, Integer> costsIn)
+	{
+		costs = costsIn;
 	}
 
 }
