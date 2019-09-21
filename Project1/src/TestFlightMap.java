@@ -44,7 +44,6 @@ public class TestFlightMap {
 //	@Test
 //	public void testFindPaths() {
 //		
-//		fm
 //		ArrayList<String> cityTest = new ArrayList<String>(); 
 //		ArrayList<Pair> pairTest = new ArrayList<Pair>();
 //		Map<String, ArrayList<Pair>> mapTest = new HashMap<String, ArrayList<Pair>>();
@@ -78,7 +77,6 @@ public class TestFlightMap {
 		testerCosts.put("B", 200);
 		fm.setCosts(testerCosts);
 		
-		System.out.println("tester: " + testerCosts);
 		assertSame(testerCosts, fm.getCosts());
 		
 		
