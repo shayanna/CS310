@@ -58,6 +58,28 @@ public class TestFlightMap {
 
 		assertSame(testerCosts, fm.getCosts());	
 	}
+	
+	@Test
+	public void testGetAllPaths()
+	{
+		fm = new FlightMap(mapTest, origin, alTest);
+		Map<String, ArrayList<String>> TEST = new HashMap<String, ArrayList<String>>();
+		ArrayList<String> TEMP = new ArrayList<String>();
+		
+		TEMP.add("A");
+		TEST.put("A", TEMP);
+		TEMP = new ArrayList<String>();
+		TEMP.add("A"); TEMP.add("B");
+		TEST.put("B", TEMP);
+		TEMP = new ArrayList<String>();
+		TEMP.add("A"); TEMP.add("C");
+		TEST.put("C", TEMP);
+		TEMP = new ArrayList<String>();
+		TEMP.add("A"); TEMP.add("B"); TEMP.add("X");
+		TEST.put("X", TEMP);
+		
+		assertEquals(TEST, fm.getAllPaths());
+	}
 
 	@Test
 	public void testBFS()
@@ -81,7 +103,6 @@ public class TestFlightMap {
 		FlightMap.BFS(origin, "X");
 		FlightMap.calcCosts();
 		
-		
 		Map<String, ArrayList<String>> TEST = new HashMap<String, ArrayList<String>>();
 		ArrayList<String> TEMP = new ArrayList<String>();
 		TEMP.add("A");
@@ -96,8 +117,13 @@ public class TestFlightMap {
 		TEMP.add("A"); TEMP.add("B"); TEMP.add("X");
 		TEST.put("X", TEMP);
 		
-		Map<String, ArrayList<String>> realPaths = FlightMap.allPaths;
-		assertEquals(TEST, realPaths);
+		Map<String, Integer> costTest = new HashMap<String, Integer>();
+		costTest.put("A", 0);
+		costTest.put("B", 200);
+		costTest.put("C", 150);
+		costTest.put("X", 380);
+		
+		assertEquals(costTest, fm.costs);
 		
 	}
 }
