@@ -3,6 +3,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Queue;
 
 public class FlightMap {
@@ -34,7 +35,7 @@ public class FlightMap {
 			allPaths.put(cities.get(i), path);
 		}
 		//printMap(allPaths);
-		//calcCosts(allPaths);
+		calcCosts(allPaths);
 
 	}
 	
@@ -103,6 +104,41 @@ public class FlightMap {
 	{
 		costs = costsIn;
 	}
+	
+	//ALL PATHS WILL BE PASSED INTO THIS
+		public static void calcCosts(Map<String, ArrayList<String>> test)
+		{
+			//iterate through all the paths you have now found
+			for (Entry<String, ArrayList<String>> entry : test.entrySet())
+			{
+				int totalCost = 0;
+				String destination = entry.getKey();
+				//this is the path for the above destination
+				ArrayList<String> temp = entry.getValue();
+				if(temp.size() > 0)
+				{
+					String previous = temp.get(0);
+					for(int i = 1; i < temp.size(); i++)
+					{
+						//look up this pair in the adjacency map to find the cost
+						ArrayList<Pair> pairs = map.get(previous);
+						for(int j =0; j < pairs.size(); j++)
+						{
+							if(pairs.get(j).getCity().equals(temp.get(i)))
+							{
+								totalCost = totalCost + pairs.get(j).getCost();
+							}
+						}
+						previous = temp.get(i);
+					}
+				}
+				costs.put(destination, totalCost);
+				System.out.println("destination: " + destination +" & cost: " +totalCost );
+				System.out.println();
+
+			}
+
+		}
 
 }
 
