@@ -29,6 +29,7 @@ public class FlightMap {
 		//NOW everything should be initialized and you want to find all the possible paths
 		for(int i =0; i < cities.size(); i++)
 		{
+			//calls BFS on our origin and each city in the graph
 			BFS(origin, cities.get(i));
 			allPaths.put(cities.get(i), path);
 		}
@@ -39,13 +40,13 @@ public class FlightMap {
 	
 	public static Boolean BFS(String start, String end)
 	{
-		path = new ArrayList<String>();
+		path = new ArrayList<String>(); //new potential path
 		int numCities = cities.size();
 		ArrayList<String> visited = new ArrayList<String>();
-		if(start.equals(end))
+		if(start.equals(end)) //already found the destination
 		{
-			path.add(start);
-			return true;
+			path.add(start); //add it to the path
+			return true; //return our path
 		}
 		Queue <String> queue = new LinkedList<>();	
 		//we're starting off with "start" and saying we've visited it
@@ -56,9 +57,9 @@ public class FlightMap {
 		{
 			//we want to examine the first thing in the queue, which is our start node
 			String currentCity = queue.peek();
-			queue.remove();
+			queue.remove(); //remove that from the queue bc we're taking a look at it
 
-			//NOW let's get the adj list for this thing
+			//NOW let's get the adj list for city
 
 			ArrayList<Pair> adjList = map.get(currentCity);
 			if(!(adjList == null))
