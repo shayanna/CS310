@@ -28,6 +28,7 @@ public class TestFlightMap {
 		alTest.add("A"); 
 		alTest.add("B"); 
 		alTest.add("C"); 
+		alTest.add("X"); 
 
 		// Initialize pairTest
 		pairTest.add(new Pair("B", 200)); 
@@ -71,5 +72,32 @@ public class TestFlightMap {
 		ArrayList <String> realPath = FlightMap.path;
 		assertEquals(testPath, realPath);
 
+	}
+	
+	@Test
+	public void testCalcCosts()
+	{
+		fm = new FlightMap(mapTest, origin, alTest);
+		FlightMap.BFS(origin, "X");
+		FlightMap.calcCosts();
+		
+		
+		Map<String, ArrayList<String>> TEST = new HashMap<String, ArrayList<String>>();
+		ArrayList<String> TEMP = new ArrayList<String>();
+		TEMP.add("A");
+		TEST.put("A", TEMP);
+		TEMP = new ArrayList<String>();
+		TEMP.add("A"); TEMP.add("B");
+		TEST.put("B", TEMP);
+		TEMP = new ArrayList<String>();
+		TEMP.add("A"); TEMP.add("C");
+		TEST.put("C", TEMP);
+		TEMP = new ArrayList<String>();
+		TEMP.add("A"); TEMP.add("B"); TEMP.add("X");
+		TEST.put("X", TEMP);
+		
+		Map<String, ArrayList<String>> realPaths = FlightMap.allPaths;
+		assertEquals(TEST, realPaths);
+		
 	}
 }
