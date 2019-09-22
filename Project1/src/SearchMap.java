@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -60,9 +62,9 @@ public class SearchMap {
 			numCities = cities.size();
 			printMap(info);
 			FlightMap map = new FlightMap(info, origin, cities);
-//			Map<String, Integer> costFinal = map.getCosts();
-//			Map<String, ArrayList<String>> pathsFinal = map.getAllPaths();
-//			writeToFile(costFinal, pathsFinal);
+			Map<String, Integer> costFinal = map.getCosts();
+			Map<String, ArrayList<String>> pathsFinal = map.getAllPaths();
+			writeToFile(costFinal, pathsFinal);
 
 
 		}
@@ -75,6 +77,44 @@ public class SearchMap {
 			System.out.println(
 					"Error reading file '" 
 							+ fileName + "'");                  
+		}
+
+	}
+	
+	public static void writeToFile(Map<String, Integer> costs, Map<String, ArrayList<String>> paths)
+	{
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("outputfile.txt");
+			Formatter fmt = new Formatter(); 
+			writer.println(fmt.format("%10s %25s %20s", "Destination", "Flight Route From " + origin, "Total Cost"));
+			for (Entry<String, Integer> entry : costs.entrySet())
+			{
+				fmt = new Formatter();
+				String destination = entry.getKey(); //destination city
+				int currentCost = entry.getValue(); //cost of getting to this city 
+				if(currentCost != 0)
+				{
+					ArrayList<String> temp = paths.get(destination); //path array in list form
+					//turn this path into a string
+					StringBuilder sb = new StringBuilder();
+					for (String s : temp)
+					{
+						sb.append(s);
+						sb.append(", ");
+					}
+					String finalDestPath = sb.toString();
+					writer.print(fmt.format("%10s %25s %20s", destination, finalDestPath, currentCost));
+					writer.println();
+				}
+
+			}
+			writer.close();
+
+
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 
 	}

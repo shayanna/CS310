@@ -34,7 +34,6 @@ public class FlightMap {
 			BFS(origin, cities.get(i));
 			allPaths.put(cities.get(i), path);
 		}
-		//printMap(allPaths);
 		calcCosts();
 
 	}
@@ -132,12 +131,15 @@ public class FlightMap {
 				}
 			}
 			costs.put(destination, totalCost);
-//			System.out.println("destination: " + destination +" & cost: " +totalCost );
-//			System.out.println();
 
 		}
 
 	}
+	
+	public Map<String, ArrayList<String>> getAllPaths()
+	{
+		return allPaths;
+	}	
 
 }
 
