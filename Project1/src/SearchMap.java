@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -60,7 +58,7 @@ public class SearchMap {
 
 			bufferedReader.close(); 
 			numCities = cities.size();
-			printMap(info);
+			//printMap(info);
 			FlightMap map = new FlightMap(info, origin, cities);
 			Map<String, Integer> costFinal = map.getCosts();
 			Map<String, ArrayList<String>> pathsFinal = map.getAllPaths();
@@ -119,29 +117,29 @@ public class SearchMap {
 
 	}
 	
-	public static void printAllCities(ArrayList<String> temp)
-	{
-		for(int i =0; i < temp.size(); i++)
-		{
-			System.out.println("City: " + temp.get(i));
-		}
-	}
-	public static void printMap(Map<String, ArrayList<Pair>> test)
-	{
-		for (Entry<String, ArrayList<Pair>> entry : test.entrySet())
-		{
-			System.out.println("Key = " + entry.getKey());
-			ArrayList<Pair> temp = entry.getValue();
-			for(int i =0; i < temp.size(); i++)
-			{
-				System.out.print("City: " + temp.get(i).getCity() + "  ");
-				System.out.print("Cost: " + temp.get(i).getCost()+ ".  " );
-			}
-			System.out.println();
-
-
-		}
-
-	}
+//	public static void printAllCities(ArrayList<String> temp)
+//	{
+//		for(int i =0; i < temp.size(); i++)
+//		{
+//			System.out.println("City: " + temp.get(i));
+//		}
+//	}
+//	public static void printMap(Map<String, ArrayList<Pair>> test)
+//	{
+//		for (Entry<String, ArrayList<Pair>> entry : test.entrySet())
+//		{
+//			System.out.println("Key = " + entry.getKey());
+//			ArrayList<Pair> temp = entry.getValue();
+//			for(int i =0; i < temp.size(); i++)
+//			{
+//				System.out.print("City: " + temp.get(i).getCity() + "  ");
+//				System.out.print("Cost: " + temp.get(i).getCost()+ ".  " );
+//			}
+//			System.out.println();
+//
+//
+//		}
+//
+//	}
 
 }

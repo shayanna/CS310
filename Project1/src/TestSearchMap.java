@@ -7,8 +7,8 @@ import org.junit.Test;
 public class TestSearchMap {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void mainTest() { //checking to see if write to file works as expected/hoped
+		
 	}
 
 }

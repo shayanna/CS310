@@ -18,6 +18,11 @@
 		<mkdir dir="${dist.dir}" />
 		<mkdir dir="${doc.dir}" />
 	</target>
+	
+	<path id="classPath">
+	    <pathelement location="lib/junit-4.12.jar"/>
+	    <pathelement location="lib/hamcrest-core-1.3.jar"/>
+	 </path>
 
 	<!-- Compile the java code in src dir into build dir -->
 	<target  name="compile" depends="init" description="Compile the Code" >
@@ -50,6 +55,21 @@
 				<attribute name="Main" value="SearchMap" />
 			</manifest>
 		</jar>
+	</target>
+	
+	<target name="test" depends="compile" description="JUnit Testing">
+		<junit printsummary="on" haltonfailure="yes" showoutput="yes">
+			<classpath refid="classPath"/>
+			<classpath>
+				<pathelement path="${java.class.path}"/>
+			</classpath>
+			<batchtest>
+				<fileset dir="${source.dir}" includes="TestFlightMap">
+				</fileset>
+				<fileset dir="${source.dir}" includes="TestSearchMap">
+				</fileset>
+			</batchtest>
+		</junit>
 	</target>
 
 </project>
