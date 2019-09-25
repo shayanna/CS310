@@ -1,5 +1,3 @@
-
-
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +14,7 @@ public class TestFlightMap {
 	public static Map<String, ArrayList<Pair>> mapTest;
 
 	@Test
-	public void constructorTest() {
+	public void constructorTest() { //this method tests the constructor using a sample
 		alTest = new ArrayList<String>(); 
 		ArrayList<Pair> pairTest = new ArrayList<Pair>();
 		mapTest = new HashMap<String, ArrayList<Pair>>();
@@ -37,10 +35,12 @@ public class TestFlightMap {
 		//Initialize Map
 		mapTest.put("A", pairTest);
 		
+		//Add the other pair to the map
 		pairTest = new ArrayList<Pair>();
 		pairTest.add(new Pair("X", 180)); 
 		mapTest.put("B", pairTest);
 
+		//Testing
 		fm = new FlightMap(mapTest, origin, alTest);
 		assertEquals("testing origin", origin, FlightMap.origin);
 		assertEquals("testing map",mapTest, FlightMap.map);
@@ -49,12 +49,13 @@ public class TestFlightMap {
 
 
 	@Test
-	public void testGetCosts()
+	public void testGetCosts() //Tests the Get Costs method
 	{
+		//Creates a new object
 		fm = new FlightMap(mapTest, origin, alTest);
 		Map<String, Integer> testerCosts = new HashMap<String, Integer>();
 		testerCosts.put("B", 200);
-		fm.setCosts(testerCosts);
+		fm.setCosts(testerCosts); //sets the cost to later check it
 
 		assertSame(testerCosts, fm.getCosts());	
 	}
@@ -82,27 +83,31 @@ public class TestFlightMap {
 	}
 
 	@Test
-	public void testBFS()
+	public void testBFS() //Test the BFS method
 	{
+		//Creates object using methods
 		fm = new FlightMap(mapTest, origin, alTest);
 		FlightMap.BFS(origin, "X");
 
+		//creating the TestPath
 		ArrayList <String> testPath = new ArrayList<String>();
 		testPath.add("A");
 		testPath.add("B");
 		testPath.add("X");
 		ArrayList <String> realPath = FlightMap.path;
+		//Checking if boths paths are equal
 		assertEquals(testPath, realPath);
 
 	}
 	
 	@Test
-	public void testCalcCosts()
+	public void testCalcCosts() //Tests Calc Costs
 	{
 		fm = new FlightMap(mapTest, origin, alTest);
 		FlightMap.BFS(origin, "X");
 		FlightMap.calcCosts();
 		
+		//Created a sample instance to test functionality
 		Map<String, ArrayList<String>> TEST = new HashMap<String, ArrayList<String>>();
 		ArrayList<String> TEMP = new ArrayList<String>();
 		TEMP.add("A");
@@ -117,6 +122,7 @@ public class TestFlightMap {
 		TEMP.add("A"); TEMP.add("B"); TEMP.add("X");
 		TEST.put("X", TEMP);
 		
+		//Builds testing map
 		Map<String, Integer> costTest = new HashMap<String, Integer>();
 		costTest.put("A", 0);
 		costTest.put("B", 200);

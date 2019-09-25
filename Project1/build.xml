@@ -27,13 +27,14 @@
 	<!-- Compile the java code in src dir into build dir -->
 	<target  name="compile" depends="init" description="Compile the Code" >
 		<javac includeantruntime="false" srcdir="${source.dir}" destdir="${build.dir}" >
-			<classpath refid="classPath"/>
+			<classpath refid="classpath.test"/>
 		</javac>
 	</target>
 
 	<!-- Generate javadocs for current project into docs dir -->
 	<target name="doc" depends="init" description="Create Documentation">
 		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}" >
+			<classpath refid="classPath"/>
 			<fileset dir="${source.dir}" defaultexcludes="yes">
 			</fileset>
 		</javadoc>
@@ -57,19 +58,22 @@
 		</jar>
 	</target>
 	
-	<target name="test" depends="compile" description="JUnit Testing">
-		<junit printsummary="on" haltonfailure="yes" showoutput="yes">
+	<target name="test-compile" depends="compile">
+		<javac srcdir="${source.dir}" destdir="${build.dir}" includeantruntime="false">
 			<classpath refid="classPath"/>
+		</javac>
+		</target>
+	
+	<target name="test" depends="test-compile">
+		<junit printsummary="on" haltonfailure="yes" fork= "true">
 			<classpath>
-				<pathelement path="${java.class.path}"/>
+				<path refid="classPath"/>
+				<pathelement location="${source.dir}" />
 			</classpath>
+			<formatter type="brief" usefile="false"/>
 			<batchtest>
-				<fileset dir="${source.dir}" includes="TestFlightMap">
-				</fileset>
-				<fileset dir="${source.dir}" includes="TestSearchMap">
-				</fileset>
+				<fileset dir="${source.dir}" includes="**/Test*.java"/>
 			</batchtest>
 		</junit>
 	</target>
-
 </project>

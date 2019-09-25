@@ -20,7 +20,7 @@ public class SearchMap {
 
 		Map<String, ArrayList<Pair>> info = new HashMap<String, ArrayList<Pair>>(); //This will store destinations & costs.
 		ArrayList<String> cities = new ArrayList<String>(); //This will store all unique cities.
-		String fileName = "inputfile.txt";
+		String fileName = "inputfile.txt"; //This is the variable for the input file.
 		String line = null; //Temporary to read in lines.
 
 		try {
@@ -49,6 +49,7 @@ public class SearchMap {
 					info.put(splited[0], temp);
 				}
 				else {
+					//If the city doesn't already exist, we add it.
 					ArrayList<Pair> temp = new ArrayList<Pair>();
 					temp.add(new Pair(splited[1], result));
 					info.put(splited[0], temp);
@@ -57,11 +58,15 @@ public class SearchMap {
 			}   
 
 			bufferedReader.close(); 
-			numCities = cities.size();
+			numCities = cities.size(); 
 			//printMap(info);
+			//This will initialize the map and calculate the various paths & costs.
 			FlightMap map = new FlightMap(info, origin, cities);
+			//Retrieval of the costs map.
 			Map<String, Integer> costFinal = map.getCosts();
+			//Retrieve allPaths map.
 			Map<String, ArrayList<String>> pathsFinal = map.getAllPaths();
+			//Write to file.
 			writeToFile(costFinal, pathsFinal);
 
 
@@ -79,12 +84,14 @@ public class SearchMap {
 
 	}
 	
+	//METHOD OBJECTIVE: Write data to the file.
 	public static void writeToFile(Map<String, Integer> costs, Map<String, ArrayList<String>> paths)
 	{
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter("outputfile.txt");
 			Formatter fmt = new Formatter(); 
+			//Format the file appropriately.
 			writer.println(fmt.format("%10s %25s %20s", "Destination", "Flight Route From " + origin, "Total Cost"));
 			for (Entry<String, Integer> entry : costs.entrySet())
 			{
@@ -96,6 +103,7 @@ public class SearchMap {
 					ArrayList<String> temp = paths.get(destination); //path array in list form
 					//turn this path into a string
 					StringBuilder sb = new StringBuilder();
+					//Append the path together.
 					for (String s : temp)
 					{
 						sb.append(s);
@@ -116,30 +124,5 @@ public class SearchMap {
 		}
 
 	}
-	
-//	public static void printAllCities(ArrayList<String> temp)
-//	{
-//		for(int i =0; i < temp.size(); i++)
-//		{
-//			System.out.println("City: " + temp.get(i));
-//		}
-//	}
-//	public static void printMap(Map<String, ArrayList<Pair>> test)
-//	{
-//		for (Entry<String, ArrayList<Pair>> entry : test.entrySet())
-//		{
-//			System.out.println("Key = " + entry.getKey());
-//			ArrayList<Pair> temp = entry.getValue();
-//			for(int i =0; i < temp.size(); i++)
-//			{
-//				System.out.print("City: " + temp.get(i).getCity() + "  ");
-//				System.out.print("Cost: " + temp.get(i).getCost()+ ".  " );
-//			}
-//			System.out.println();
-//
-//
-//		}
-//
-//	}
 
 }

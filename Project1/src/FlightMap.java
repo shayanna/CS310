@@ -156,11 +156,14 @@ public class FlightMap {
 
 }
 
+//This class allows for reference to a city and it's associated cost as a node(pair).
+//It's used when storing paths in a Map for each destination.
 class Pair {
 
 	public String city = "";
 	public Integer cost;
 
+	//Constructor
 	public Pair(String city, Integer cost)
 	{
 		this.city = city;
