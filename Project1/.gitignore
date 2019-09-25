@@ -1,2 +1,6 @@
 /.metadata/
 /bin/
+/dist/
+/doc/
+/inputfile.txt/
+/outputfile.txt/
