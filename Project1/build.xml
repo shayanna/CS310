@@ -19,7 +19,7 @@
 		<mkdir dir="${doc.dir}" />
 	</target>
 	
-	<path id="classPath">
+	<path id="classpath.test">
 	    <pathelement location="lib/junit-4.12.jar"/>
 	    <pathelement location="lib/hamcrest-core-1.3.jar"/>
 	 </path>
@@ -34,7 +34,7 @@
 	<!-- Generate javadocs for current project into docs dir -->
 	<target name="doc" depends="init" description="Create Documentation">
 		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}" >
-			<classpath refid="classPath"/>
+			<classpath refid="classpath.test"/>
 			<fileset dir="${source.dir}" defaultexcludes="yes">
 			</fileset>
 		</javadoc>
@@ -60,19 +60,19 @@
 	
 	<target name="test-compile" depends="compile">
 		<javac srcdir="${source.dir}" destdir="${build.dir}" includeantruntime="false">
-			<classpath refid="classPath"/>
+			<classpath refid="classpath.test"/>
 		</javac>
 		</target>
 	
 	<target name="test" depends="test-compile">
 		<junit printsummary="on" haltonfailure="yes" fork= "true">
 			<classpath>
-				<path refid="classPath"/>
+				<path refid="classpath.test"/>
 				<pathelement location="${source.dir}" />
 			</classpath>
 			<formatter type="brief" usefile="false"/>
 			<batchtest>
-				<fileset dir="${source.dir}" includes="**/Test*.java"/>
+				<fileset dir="${source.dir}" includes="**/*Test.java"/>
 			</batchtest>
 		</junit>
 	</target>
